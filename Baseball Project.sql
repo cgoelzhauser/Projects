@@ -25,7 +25,7 @@ SET innings = 9
 WHERE innings IS NULL;
 
 
---Add a new column named "throws" in the existing team_pitching table and then insert values for the new column--
+--Add a new column named "throws" in the existing team_pitching table and then insert values into the new column--
 ALTER TABLE team_pitching$
 ADD throws VARCHAR(255);
 
@@ -42,7 +42,7 @@ WHERE name IN('Jordan Montgomery', 'Steven Matz','Drew Rom', 'Matthew Liberatore
               'Génesis Cabrera', 'Andrew Suárez', 'John King', 'Packy Naughton');
 
 
---How many different picthers pitched for the Cardinals this year--
+--How many different pitchers pitched for the Cardinals this year--
 SELECT COUNT(*) AS pitchers_used
 FROM team_pitching$;
 
@@ -59,7 +59,7 @@ FROM team_pitching$
 ORDER BY innings_pitched DESC;
 
 
---What pitchers had more than 100 strikeouts--
+--Which pitchers had more than 100 strikeouts--
 SELECT name, SUM(strikeouts) number_of_strikeouts
 FROM team_pitching$
 GROUP BY name
@@ -79,7 +79,7 @@ GROUP BY CONCAT(first_name, ' ', last_name)
 ORDER BY SUM(hits) DESC;
 
 
---What players had 500-700 plate appearances--
+--Which players had 500-700 plate appearances--
 SELECT CONCAT(first_name, ' ', last_name) AS full_name, SUM(plate_appearances) AS total_plate_appearances
 FROM team_batting$
 GROUP BY CONCAT(first_name, ' ', last_name)
@@ -107,7 +107,7 @@ FROM game_results$
 WHERE  innings <> 9;
 
 
---What home game had the least amount of attendance--
+--Which home game had the lowest attendance--
 SELECT TOP 1 opponent, MIN(attendance) AS least_attended_amount
 FROM game_results$
 WHERE home_away = 'home'
@@ -120,13 +120,13 @@ SELECT DISTINCT opponent
 FROM game_results$;
 
 
---What was the average attendance for home day games--
+--What was the average attendance for home games during the daytime--
 SELECT ROUND(AVG(attendance),0) AS averge_daygame_attendance
 FROM game_results$
 WHERE day_night_game = 'D' AND home_away = 'home';
 	
 
---What was the average attendance for home night games--
+--What was the average attendance for home games at night--
 SELECT ROUND(AVG(attendance),0) AS averge_nightgame_attendance
 FROM game_results$
 WHERE day_night_game = 'N' AND home_away = 'home';
